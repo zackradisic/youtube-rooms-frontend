@@ -35,9 +35,9 @@ const RoomPreviews = () => {
 
   const rooms = useSelector((state: RootState) => state.roomPreviews.rooms)
 
-  const { isAuthenticated, user } = useAuth()
+  const { user } = useAuth()
 
-  if (!isAuthenticated) {
+  if (!user) {
     return (
       <h1>Please authenticate yourself by clicking <a href={`${process.env.REACT_APP_API_URL}/api/auth/discord`}>here</a></h1>
     )
