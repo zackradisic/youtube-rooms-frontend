@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactChild[] | Reac
   }, [])
 
   const getUserInfo = async () => {
-    const { data: user } = await api.get('/me', { withCredentials: true })
+    const { data: user } = await api.get('/me')
     console.log(user)
     if (user) setUser(user)
   }
