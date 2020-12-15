@@ -14,6 +14,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { Dispatch } from '@reduxjs/toolkit'
 import { verifyRoomPassword } from '../../util'
+import useAuth from '../../auth/context'
 
 const style = {
   roomPreview: {
@@ -33,6 +34,15 @@ const RoomPreviews = () => {
   const dispatch = useDispatch()
 
   const rooms = useSelector((state: RootState) => state.roomPreviews.rooms)
+
+  const { isAuthenticated, user } = useAuth()
+
+  console.log(isAuthenticated)
+  if (!isAuthenticated) {
+    return (
+      <h1>Please authenticate yourself by clicking <a href={`${process.env.REACT_APP_API_URL}/api/auth/discord`}>here</a></h1>
+    )
+  }
 
   let fetched = false
   const [modalActive, setModalActive] = useState(false)
@@ -94,7 +104,7 @@ const RoomPreviews = () => {
           </div>
           <div className="column is-6 has-text-right" style={{ verticalAlign: 'text-bottom' }}>
             <h1 style={{ color: 'rgb(22, 22, 22)' }}>h</h1>
-            <h1 style={{ ...style.title, fontSize: '16px' }}>Logged in as: zack#6593</h1>
+            <h1 style={{ ...style.title, fontSize: '16px' }}>Logged in as: {`${user?.discordUsername}#${user?.discordDiscriminator}`}</h1>
           </div>
           {roomsDOM}
           <PasswordPrompt enterPassword={enterPassword} dispatch={dispatch} isActive={modalActive} toggleModal={toggleModal} />
