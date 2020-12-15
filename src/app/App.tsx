@@ -8,18 +8,21 @@ import Room from '../pages/room'
 
 import logo from './logo.svg'
 import './App.css'
+import { AuthProvider } from '../auth/context'
 
 const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-        <Route path="/rooms/:roomName" children={<Room />} />
-      </Switch>
-    </Router>
+          <Route path="/rooms/:roomName" children={<Room />} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   )
 }
 
