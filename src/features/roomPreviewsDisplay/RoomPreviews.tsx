@@ -40,6 +40,7 @@ const RoomPreviews = () => {
   useEffect(() => {
     if (!user) {
       const a = async () => getUserInfo()
+      a()
     }
   }, [user])
 
