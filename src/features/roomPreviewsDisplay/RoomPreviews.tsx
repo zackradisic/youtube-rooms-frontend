@@ -35,7 +35,13 @@ const RoomPreviews = () => {
 
   const rooms = useSelector((state: RootState) => state.roomPreviews.rooms)
 
-  const { user } = useAuth()
+  const { user, getUserInfo } = useAuth()
+
+  useEffect(() => {
+    if (!user) {
+      const a = async () => getUserInfo()
+    }
+  }, [user])
 
   if (!user) {
     return (

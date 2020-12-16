@@ -54,10 +54,6 @@ export const AuthProvider = ({ children }: { children: React.ReactChild[] | Reac
           }
         }
         // Add some logic to handle invalid or expired token
-      } else {
-        const { data: user } = await api.get('/me', { withCredentials: true })
-        console.log(user)
-        if (user) setUser(user)
       }
       setLoading(false)
     }
