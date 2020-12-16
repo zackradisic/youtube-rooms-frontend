@@ -35,20 +35,7 @@ const RoomPreviews = () => {
 
   const rooms = useSelector((state: RootState) => state.roomPreviews.rooms)
 
-  const { user, getUserInfo } = useAuth()
-
-  useEffect(() => {
-    if (!user) {
-      const a = async () => getUserInfo()
-      a()
-    }
-  }, [user])
-
-  if (!user) {
-    return (
-      <h1>Please authenticate yourself by clicking <a href={`${process.env.REACT_APP_API_URL}/api/auth/discord`}>here</a></h1>
-    )
-  }
+  const { user } = useAuth()
 
   let fetched = false
   const [modalActive, setModalActive] = useState(false)
@@ -62,7 +49,7 @@ const RoomPreviews = () => {
       }
     }
 
-    loadRoomPreviews()
+    if (user) loadRoomPreviews()
   }, [])
 
   const onClick = (room: RoomPreview) => {
@@ -98,6 +85,12 @@ const RoomPreviews = () => {
 
       history.push('/rooms/' + encodeURI(selectedRoom.name))
     }
+  }
+
+  if (!user) {
+    return (
+      <h1>Please authenticate yourself by clicking <a href={`${process.env.REACT_APP_API_URL}/api/auth/discord`}>here</a></h1>
+    )
   }
 
   const roomsDOM = rooms.map(e => <RoomPreviewContainer onClick={() => onClick(e)} key={`room-preview-${e.id}`} room={e} />)
