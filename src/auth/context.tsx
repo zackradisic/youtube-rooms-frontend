@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }: { children: React.ReactChild[] | Reac
   const [loading, setLoading] = useState(true)
   const history = useHistory()
 
-  console.log('test')
   useEffect(() => {
     const loadUserFromCookies = async () => {
       const token = Cookies.get('accessToken')
@@ -55,10 +54,9 @@ export const AuthProvider = ({ children }: { children: React.ReactChild[] | Reac
           }
         }
         // Add some logic to handle invalid or expired token
+      } else {
+        await getUserInfo()
       }
-
-      console.log('test')
-      await getUserInfo()
       setLoading(false)
     }
 
