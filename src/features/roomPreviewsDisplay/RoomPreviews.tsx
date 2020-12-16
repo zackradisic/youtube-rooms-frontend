@@ -50,7 +50,7 @@ const RoomPreviews = () => {
     }
 
     if (user) loadRoomPreviews()
-  }, [])
+  }, [user])
 
   const onClick = (room: RoomPreview) => {
     console.log(room)
