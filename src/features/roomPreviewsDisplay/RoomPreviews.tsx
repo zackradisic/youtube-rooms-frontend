@@ -89,7 +89,7 @@ const RoomPreviews = () => {
 
   if (!user) {
     return (
-      <h1>Please authenticate yourself by clicking <a href={`${process.env.REACT_APP_API_URL}/api/auth/discord`}>here</a></h1>
+      <h1>Please sign-in with Discord by clicking <a href={`${process.env.REACT_APP_API_URL}/api/auth/discord`}>here</a></h1>
     )
   }
 
